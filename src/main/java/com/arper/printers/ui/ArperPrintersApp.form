@@ -127,7 +127,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="filters" max="32767" attributes="0"/>
-                  <Component id="documents" max="32767" attributes="0"/>
+                  <Component id="tblDocuments" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -138,7 +138,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="filters" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="documents" min="-2" pref="213" max="-2" attributes="0"/>
+              <Component id="tblDocuments" min="-2" pref="213" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -217,9 +217,23 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JScrollPane" name="documents">
+    <Container class="javax.swing.JScrollPane" name="tblDocuments">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="documents">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="4" rowCount="4">
+                <Column editable="true" title="Fecha de Emisi&#xf3;n" type="java.lang.String"/>
+                <Column editable="true" title="Descripcion" type="java.lang.String"/>
+                <Column editable="true" title="Tipo Documento" type="java.lang.String"/>
+                <Column editable="true" title="Estado" type="java.lang.String"/>
+              </Table>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
     </Container>
   </SubComponents>
 </Form>

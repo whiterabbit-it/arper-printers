@@ -69,7 +69,8 @@ public class ArperPrintersApp extends javax.swing.JFrame {
         sellPoints = new javax.swing.JComboBox();
         lblPrinter = new javax.swing.JLabel();
         printers = new javax.swing.JComboBox();
-        documents = new javax.swing.JScrollPane();
+        tblDocuments = new javax.swing.JScrollPane();
+        documents = new javax.swing.JTable();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
@@ -127,6 +128,27 @@ public class ArperPrintersApp extends javax.swing.JFrame {
                     .addComponent(printers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        documents.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Fecha de Emisión", "Descripcion", "Tipo Documento", "Estado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tblDocuments.setViewportView(documents);
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -204,7 +226,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(filters, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(documents))
+                    .addComponent(tblDocuments))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -212,7 +234,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(filters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(documents, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tblDocuments, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -297,7 +319,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
     private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
-    private javax.swing.JScrollPane documents;
+    private javax.swing.JTable documents;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
@@ -312,6 +334,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JComboBox sellPoints;
+    private javax.swing.JScrollPane tblDocuments;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
