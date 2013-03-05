@@ -1,21 +1,29 @@
 package com.arper.printers.ui;
 
-import com.arper.printers.ui.about.AboutUsDialog;
-import com.arper.printers.services.PrinterService;
-import com.arper.printers.services.impl.PrinterServiceImpl;
-import com.arper.printers.ui.renderers.PrintRenderer;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+
 import javax.print.PrintService;
 import javax.swing.ImageIcon;
+import javax.swing.JTextPane;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.arper.printers.impl.ShortcutServiceImpl;
+import com.arper.printers.services.PrinterService;
+import com.arper.printers.services.impl.PrinterServiceImpl;
+import com.arper.printers.ui.about.AboutUsDialog;
+import com.arper.printers.ui.renderers.PrintRenderer;
+import com.melloware.jintellitype.JIntellitype;
 
 /**
  *
@@ -237,14 +245,16 @@ public class ArperPrintersApp extends javax.swing.JFrame {
                 .addComponent(tblDocuments, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-
         bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
+    	// To unregister them just call unregisterHotKey with the unique identifier
+    	JIntellitype.getInstance().unregisterHotKey(1);
+    	JIntellitype.getInstance().cleanUp();
+    	System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
@@ -256,6 +266,18 @@ public class ArperPrintersApp extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+    	final ArperPrintersApp arperPrintersApp = new ArperPrintersApp();
+    	//Inicio libreria de shortcut
+    	JIntellitype.setLibraryLocation("src\\main\\resources\\JIntellitype64.dll");
+    	JIntellitype.getInstance();
+    	// Assign global hotkeys to ALT+SHIFT+B
+    	JIntellitype.getInstance().registerHotKey(1, JIntellitype.MOD_ALT + JIntellitype.MOD_SHIFT, (int)'B');
+    	//assign this class to be a HotKeyListener
+    	
+    	
+    	
+    	JIntellitype.getInstance().addHotKeyListener(new ShortcutServiceImpl(arperPrintersApp));
+    	
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -282,7 +304,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ArperPrintersApp().setVisible(true);
+               arperPrintersApp.setVisible(true);
             }
         });
     }

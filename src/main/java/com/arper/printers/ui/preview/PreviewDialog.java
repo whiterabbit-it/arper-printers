@@ -4,6 +4,12 @@
  */
 package com.arper.printers.ui.preview;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.swing.JTextPane;
+
 /**
  *
  * @author owentar
@@ -91,7 +97,25 @@ public class PreviewDialog extends javax.swing.JDialog {
                 .addComponent(previewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+        
 
+//		JTextPane tp = new JTextPane();
+//		previewPanel.add(tp);
+//		URL url;
+//		try {
+//			url = new URL("FILE:C:\\Test.html");
+//			tp.setPage(url);
+//		} catch (MalformedURLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//        previewPanel.revalidate();
+//        previewPanel.repaint();
+//        previewPanel.setVisible(true);
+        
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
