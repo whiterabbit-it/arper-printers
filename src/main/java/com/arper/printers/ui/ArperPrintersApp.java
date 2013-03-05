@@ -37,8 +37,9 @@ public class ArperPrintersApp extends javax.swing.JFrame {
     public ArperPrintersApp() {
         printersOptions = printerService.getPrinters();
         
-        initComponents();
         loadSystemTry();
+        
+        initComponents();
     }
 
     public List<PrintService> getPrintersOptions() {
@@ -267,11 +268,8 @@ public class ArperPrintersApp extends javax.swing.JFrame {
     private void loadSystemTry() {
         if (SystemTray.isSupported()) {
             SystemTray systemTray = SystemTray.getSystemTray();
+            
             Image image = createImage("favicon.ico");
-            
-            if (image == null)
-                return;
-            
             TrayIcon trayIcon = new TrayIcon(image, "Arper Printer");
             trayIcon.addActionListener(new ActionListener() {
                 @Override
@@ -290,14 +288,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
     }
     
     private Image createImage(String imagePath) {
-        URL urlImage = ArperPrintersApp.class.getResource(imagePath);
-        
-        if (urlImage == null) {
-            logger.error("Could not load image " + imagePath);
-            return null;
-        } else {
-            return (new ImageIcon(urlImage)).getImage();
-        }
+        return (new ImageIcon(imagePath)).getImage();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
