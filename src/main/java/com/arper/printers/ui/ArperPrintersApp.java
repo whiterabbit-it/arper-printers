@@ -4,15 +4,27 @@ import com.arper.printers.ui.about.AboutUsDialog;
 import com.arper.printers.services.PrinterService;
 import com.arper.printers.services.impl.PrinterServiceImpl;
 import com.arper.printers.ui.renderers.PrintRenderer;
+import java.awt.AWTException;
+import java.awt.Image;
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.List;
 import javax.print.PrintService;
+import javax.swing.ImageIcon;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author owentar
  */
 public class ArperPrintersApp extends javax.swing.JFrame {
-
+    
+    private static final Logger logger = LoggerFactory.getLogger(ArperPrintersApp.class);
+    
     // TODO: inject dependency
     private PrinterService printerService = new PrinterServiceImpl();
     
@@ -26,6 +38,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
         printersOptions = printerService.getPrinters();
         
         initComponents();
+        loadSystemTry();
     }
 
     public List<PrintService> getPrintersOptions() {
@@ -71,7 +84,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
         contentsMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(createImage("favicon.ico"));
 
         lblSellPoint.setText("Cajas:");
 
@@ -249,6 +262,42 @@ public class ArperPrintersApp extends javax.swing.JFrame {
                 new ArperPrintersApp().setVisible(true);
             }
         });
+    }
+    
+    private void loadSystemTry() {
+        if (SystemTray.isSupported()) {
+            SystemTray systemTray = SystemTray.getSystemTray();
+            Image image = createImage("favicon.ico");
+            
+            if (image == null)
+                return;
+            
+            TrayIcon trayIcon = new TrayIcon(image, "Arper Printer");
+            trayIcon.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    ArperPrintersApp.this.setVisible(true);
+                }
+            });
+            try{ 
+                systemTray.add(trayIcon);
+            } catch(AWTException e) {
+                logger.error("Tray Icon could not be added", e);
+            }
+        } else {
+            logger.error("System Tray is not supported");
+        }
+    }
+    
+    private Image createImage(String imagePath) {
+        URL urlImage = ArperPrintersApp.class.getResource(imagePath);
+        
+        if (urlImage == null) {
+            logger.error("Could not load image " + imagePath);
+            return null;
+        } else {
+            return (new ImageIcon(urlImage)).getImage();
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
