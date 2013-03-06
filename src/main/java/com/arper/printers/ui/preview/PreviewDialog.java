@@ -22,6 +22,17 @@ public class PreviewDialog extends javax.swing.JDialog {
     public PreviewDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        loadDummyPreview();
+    }
+    
+    private void loadDummyPreview() {
+        try {
+            URL url = new URL("FILE:C:\\Test.html");
+            previewContent.setPage(url);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -36,7 +47,8 @@ public class PreviewDialog extends javax.swing.JDialog {
         infoPanel = new javax.swing.JPanel();
         lblPrinter = new javax.swing.JLabel();
         selectedPrinter = new javax.swing.JLabel();
-        previewPanel = new javax.swing.JPanel();
+        previewPanel = new javax.swing.JScrollPane();
+        previewContent = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -64,28 +76,18 @@ public class PreviewDialog extends javax.swing.JDialog {
                 .addGap(0, 6, Short.MAX_VALUE))
         );
 
-        previewPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout previewPanelLayout = new javax.swing.GroupLayout(previewPanel);
-        previewPanel.setLayout(previewPanelLayout);
-        previewPanelLayout.setHorizontalGroup(
-            previewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        previewPanelLayout.setVerticalGroup(
-            previewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 218, Short.MAX_VALUE)
-        );
+        previewContent.setEditable(false);
+        previewPanel.setViewportView(previewContent);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(infoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(previewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(previewPanel)
+                    .addComponent(infoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -94,28 +96,10 @@ public class PreviewDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(infoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(previewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(previewPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        
 
-//		JTextPane tp = new JTextPane();
-//		previewPanel.add(tp);
-//		URL url;
-//		try {
-//			url = new URL("FILE:C:\\Test.html");
-//			tp.setPage(url);
-//		} catch (MalformedURLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//        previewPanel.revalidate();
-//        previewPanel.repaint();
-//        previewPanel.setVisible(true);
-        
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -163,7 +147,8 @@ public class PreviewDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel infoPanel;
     private javax.swing.JLabel lblPrinter;
-    private javax.swing.JPanel previewPanel;
+    private javax.swing.JTextPane previewContent;
+    private javax.swing.JScrollPane previewPanel;
     private javax.swing.JLabel selectedPrinter;
     // End of variables declaration//GEN-END:variables
 }
