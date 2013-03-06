@@ -252,8 +252,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
 
     private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
     	// To unregister them just call unregisterHotKey with the unique identifier
-    	JIntellitype.getInstance().unregisterHotKey(1);
-    	JIntellitype.getInstance().cleanUp();
+    	shutdownShortcut();
     	System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
@@ -267,17 +266,9 @@ public class ArperPrintersApp extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
     	final ArperPrintersApp arperPrintersApp = new ArperPrintersApp();
-    	//Inicio libreria de shortcut
-    	JIntellitype.setLibraryLocation("src\\main\\resources\\JIntellitype64.dll");
-    	JIntellitype.getInstance();
-    	// Assign global hotkeys to ALT+SHIFT+B
-    	JIntellitype.getInstance().registerHotKey(1, JIntellitype.MOD_ALT + JIntellitype.MOD_SHIFT, (int)'B');
-    	//assign this class to be a HotKeyListener
-    	
-    	
-    	
-    	JIntellitype.getInstance().addHotKeyListener(new ShortcutServiceImpl(arperPrintersApp));
-    	
+        
+        loadShortcut(arperPrintersApp);
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -313,7 +304,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
         if (SystemTray.isSupported()) {
             SystemTray systemTray = SystemTray.getSystemTray();
             
-            Image image = createImage("favicon.ico");
+            Image image = createImage("src/main/resources/favicon.ico");
             TrayIcon trayIcon = new TrayIcon(image, "Arper Printer");
             trayIcon.addActionListener(new ActionListener() {
                 @Override
@@ -333,6 +324,21 @@ public class ArperPrintersApp extends javax.swing.JFrame {
     
     private Image createImage(String imagePath) {
         return (new ImageIcon(imagePath)).getImage();
+    }
+    
+    private static void loadShortcut(ArperPrintersApp arperPrintersApp) {
+        JIntellitype.setLibraryLocation("src/main/resources/JIntellitype64.dll");
+    	JIntellitype.getInstance();
+    	// Assign global hotkeys to ALT+SHIFT+B
+    	JIntellitype.getInstance().registerHotKey(1, JIntellitype.MOD_ALT + JIntellitype.MOD_SHIFT, (int)'B');
+    	//assign this class to be a HotKeyListener
+    	
+    	JIntellitype.getInstance().addHotKeyListener(new ShortcutServiceImpl(arperPrintersApp));
+    }
+    
+    private static void shutdownShortcut() {
+        JIntellitype.getInstance().unregisterHotKey(1);
+    	JIntellitype.getInstance().cleanUp();
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
