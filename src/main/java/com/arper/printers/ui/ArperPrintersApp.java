@@ -34,6 +34,8 @@ public class ArperPrintersApp extends javax.swing.JFrame {
     
     private static final Logger logger = LoggerFactory.getLogger(ArperPrintersApp.class);
     
+    private TrayIcon trayIcon;
+    
     // TODO: inject dependency
     private PrinterService printerService = new PrinterServiceImpl();
     
@@ -165,6 +167,11 @@ public class ArperPrintersApp extends javax.swing.JFrame {
 
         openMenuItem.setMnemonic('o');
         openMenuItem.setText("Open");
+        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(openMenuItem);
 
         saveMenuItem.setMnemonic('s');
@@ -263,6 +270,10 @@ public class ArperPrintersApp extends javax.swing.JFrame {
         aboutUsDialog.setVisible(true);
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
+    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
+        trayIcon.displayMessage("Titulo", "Mensaje de prueba", TrayIcon.MessageType.INFO);
+    }//GEN-LAST:event_openMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -307,13 +318,14 @@ public class ArperPrintersApp extends javax.swing.JFrame {
             SystemTray systemTray = SystemTray.getSystemTray();
             
             Image image = createImage("src/main/resources/favicon.ico");
-            TrayIcon trayIcon = new TrayIcon(image, "Arper Printer");
+            trayIcon = new TrayIcon(image, "Arper Printer");
             trayIcon.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
                     ArperPrintersApp.this.setVisible(true);
                 }
             });
+            
             try{ 
                 systemTray.add(trayIcon);
             } catch(AWTException e) {
