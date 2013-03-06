@@ -78,7 +78,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
 
         filters = new javax.swing.JPanel();
         lblSellPoint = new javax.swing.JLabel();
-        sellPoints = new javax.swing.JComboBox();
+        sellPoint = new javax.swing.JLabel();
         lblPrinter = new javax.swing.JLabel();
         printers = new javax.swing.JComboBox();
         tblDocuments = new javax.swing.JScrollPane();
@@ -102,7 +102,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
 
         lblSellPoint.setText("Cajas:");
 
-        sellPoints.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Caja 1", "Caja 2", "Caja 3", "Caja 4" }));
+        sellPoint.setText("Caja 1");
 
         lblPrinter.setText("Impresora:");
 
@@ -122,12 +122,12 @@ public class ArperPrintersApp extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblSellPoint)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sellPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sellPoint)
+                .addGap(92, 92, 92)
                 .addComponent(lblPrinter)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(printers, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         filtersLayout.setVerticalGroup(
             filtersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,9 +135,9 @@ public class ArperPrintersApp extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(filtersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSellPoint)
-                    .addComponent(sellPoints, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPrinter)
-                    .addComponent(printers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(printers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sellPoint))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -254,6 +254,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
                 .addComponent(tblDocuments, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
         bindingGroup.bind();
 
         pack();
@@ -379,7 +380,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
     private javax.swing.JComboBox printers;
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
-    private javax.swing.JComboBox sellPoints;
+    private javax.swing.JLabel sellPoint;
     private javax.swing.JScrollPane tblDocuments;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables

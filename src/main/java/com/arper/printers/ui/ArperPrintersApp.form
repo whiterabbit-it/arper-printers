@@ -15,6 +15,9 @@
                 <Property name="mnemonic" type="int" value="111"/>
                 <Property name="text" type="java.lang.String" value="Open"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="openMenuItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="saveMenuItem">
               <Properties>
@@ -154,12 +157,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblSellPoint" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="sellPoints" min="-2" pref="125" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="sellPoint" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                   <Component id="lblPrinter" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="printers" min="-2" pref="150" max="-2" attributes="0"/>
-                  <EmptySpace pref="142" max="32767" attributes="0"/>
+                  <EmptySpace pref="150" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -169,9 +172,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblSellPoint" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="sellPoints" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblPrinter" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="printers" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="sellPoint" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -184,16 +187,9 @@
             <Property name="text" type="java.lang.String" value="Cajas:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="sellPoints">
+        <Component class="javax.swing.JLabel" name="sellPoint">
           <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Caja 1"/>
-                <StringItem index="1" value="Caja 2"/>
-                <StringItem index="2" value="Caja 3"/>
-                <StringItem index="3" value="Caja 4"/>
-              </StringArray>
-            </Property>
+            <Property name="text" type="java.lang.String" value="Caja 1"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblPrinter">
