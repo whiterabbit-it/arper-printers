@@ -11,4 +11,6 @@ public interface PrinterService {
     
     List<PrintService> getPrinters();
     
+    PrintService getDefaultPrinter();
+    
 }

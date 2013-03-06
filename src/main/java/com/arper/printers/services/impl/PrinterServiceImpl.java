@@ -21,5 +21,10 @@ public class PrinterServiceImpl implements PrinterService {
     public List<PrintService> getPrinters() {
         return printers;
     }
+
+    @Override
+    public PrintService getDefaultPrinter() {
+        return PrintServiceLookup.lookupDefaultPrintService();
+    }
     
 }

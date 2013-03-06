@@ -45,6 +45,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
      */
     public ArperPrintersApp() {
         printersOptions = printerService.getPrinters();
+        selectedPrinter = printerService.getDefaultPrinter();
         
         loadSystemTry();
         
