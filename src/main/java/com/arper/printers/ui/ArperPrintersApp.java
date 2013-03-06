@@ -6,14 +6,10 @@ import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 import javax.print.PrintService;
 import javax.swing.ImageIcon;
-import javax.swing.JTextPane;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +18,7 @@ import com.arper.printers.impl.ShortcutServiceImpl;
 import com.arper.printers.services.PrinterService;
 import com.arper.printers.services.impl.PrinterServiceImpl;
 import com.arper.printers.ui.about.AboutUsDialog;
+import com.arper.printers.ui.preview.PreviewDialog;
 import com.arper.printers.ui.renderers.PrintRenderer;
 import com.melloware.jintellitype.JIntellitype;
 import org.apache.commons.lang.SystemUtils;
@@ -87,20 +84,13 @@ public class ArperPrintersApp extends javax.swing.JFrame {
         fileMenu = new javax.swing.JMenu();
         openMenuItem = new javax.swing.JMenuItem();
         saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setIconImage(createImage("src/main/resources/favicon.gif"));
 
-        lblSellPoint.setText("Cajas:");
+        lblSellPoint.setText("Caja:");
 
         sellPoint.setText("Caja 1");
 
@@ -127,7 +117,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
                 .addComponent(lblPrinter)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(printers, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
         filtersLayout.setVerticalGroup(
             filtersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,17 +133,17 @@ public class ArperPrintersApp extends javax.swing.JFrame {
 
         documents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {"03/03/2013 12:03:43", "FACTURA", "Pendiente"},
+                {"03/03/2013 12:04:12", "FACTURA", "Pendiente"},
+                {"03/03/2013 12:06:23", "FACTURA", "Pendiente"},
+                {"03/03/2013 12:09:40", "FACTURA", "Pendiente"}
             },
             new String [] {
-                "Fecha de Emisión", "Descripcion", "Tipo Documento", "Estado"
+                "Fecha de Emisión", "Tipo Documento", "Estado"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -163,10 +153,10 @@ public class ArperPrintersApp extends javax.swing.JFrame {
         tblDocuments.setViewportView(documents);
 
         fileMenu.setMnemonic('f');
-        fileMenu.setText("File");
+        fileMenu.setText("Archivo");
 
         openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Open");
+        openMenuItem.setText("Prueba Notificacion");
         openMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 openMenuItemActionPerformed(evt);
@@ -175,16 +165,16 @@ public class ArperPrintersApp extends javax.swing.JFrame {
         fileMenu.add(openMenuItem);
 
         saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Save");
+        saveMenuItem.setText("Imprimir");
+        saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveMenuItemActionPerformed(evt);
+            }
+        });
         fileMenu.add(saveMenuItem);
 
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Save As ...");
-        saveAsMenuItem.setDisplayedMnemonicIndex(5);
-        fileMenu.add(saveAsMenuItem);
-
         exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Exit");
+        exitMenuItem.setText("Salir");
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitMenuItemActionPerformed(evt);
@@ -194,36 +184,11 @@ public class ArperPrintersApp extends javax.swing.JFrame {
 
         menuBar.add(fileMenu);
 
-        editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
-
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
-        editMenu.add(cutMenuItem);
-
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
-        editMenu.add(deleteMenuItem);
-
-        menuBar.add(editMenu);
-
         helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
-
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Contents");
-        helpMenu.add(contentsMenuItem);
+        helpMenu.setText("Ayuda");
 
         aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
+        aboutMenuItem.setText("Acerca de White RabbIT");
         aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aboutMenuItemActionPerformed(evt);
@@ -274,6 +239,11 @@ public class ArperPrintersApp extends javax.swing.JFrame {
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
         trayIcon.displayMessage("Titulo", "Mensaje de prueba", TrayIcon.MessageType.INFO);
     }//GEN-LAST:event_openMenuItemActionPerformed
+
+    private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
+        PreviewDialog previewDialog = new PreviewDialog(this);
+        previewDialog.setVisible(true);
+    }//GEN-LAST:event_saveMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,12 +333,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JMenuItem contentsMenuItem;
-    private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JTable documents;
-    private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JPanel filters;
@@ -377,9 +342,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
     private javax.swing.JLabel lblSellPoint;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JComboBox printers;
-    private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JLabel sellPoint;
     private javax.swing.JScrollPane tblDocuments;
