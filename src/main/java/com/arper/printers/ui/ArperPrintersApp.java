@@ -318,8 +318,9 @@ public class ArperPrintersApp extends javax.swing.JFrame {
         if (SystemTray.isSupported()) {
             SystemTray systemTray = SystemTray.getSystemTray();
             
-            Image image = createImage("src/main/resources/favicon.ico");
+            Image image = createImage("src/main/resources/favicon.gif");
             trayIcon = new TrayIcon(image, "Arper Printer");
+            trayIcon.setImageAutoSize(true);
             trayIcon.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
