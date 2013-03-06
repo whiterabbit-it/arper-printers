@@ -98,7 +98,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
         contentsMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
 
-        setIconImage(createImage("favicon.ico"));
+        setIconImage(createImage("src/main/resources/favicon.gif"));
 
         lblSellPoint.setText("Cajas:");
 
@@ -319,7 +319,7 @@ public class ArperPrintersApp extends javax.swing.JFrame {
             SystemTray systemTray = SystemTray.getSystemTray();
             
             Image image = createImage("src/main/resources/favicon.gif");
-            trayIcon = new TrayIcon(image, "Arper Printer");
+            trayIcon = new TrayIcon(image, "Arper Printer");  
             trayIcon.setImageAutoSize(true);
             trayIcon.addActionListener(new ActionListener() {
                 @Override
