@@ -1,14 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.arper.printers.ui.preview;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.swing.JTextPane;
 
 /**
  *
@@ -19,20 +9,16 @@ public class PreviewDialog extends javax.swing.JDialog {
     /**
      * Creates new form PreviewDialog
      */
-    public PreviewDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public PreviewDialog(java.awt.Frame parent) {
+        super(parent, "Vista previa de impresión", true);
         initComponents();
-        
+
         loadDummyPreview();
     }
-    
+
     private void loadDummyPreview() {
-        try {
-            URL url = new URL("FILE:C:\\Test.html");
-            previewContent.setPage(url);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        previewContent.setContentType("text/html");
+        previewContent.setText("<html><head><title>Argenper</title></head><body><h1>Documento de Ejemplo</h1><p>Este es un documento de ejemplo</p></body></html>");
     }
 
     /**
@@ -133,7 +119,7 @@ public class PreviewDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PreviewDialog dialog = new PreviewDialog(new javax.swing.JFrame(), true);
+                PreviewDialog dialog = new PreviewDialog(new javax.swing.JFrame());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
