@@ -24,6 +24,7 @@ import com.arper.printers.services.impl.PrinterServiceImpl;
 import com.arper.printers.ui.about.AboutUsDialog;
 import com.arper.printers.ui.renderers.PrintRenderer;
 import com.melloware.jintellitype.JIntellitype;
+import org.apache.commons.lang.SystemUtils;
 
 /**
  *
@@ -327,18 +328,22 @@ public class ArperPrintersApp extends javax.swing.JFrame {
     }
     
     private static void loadShortcut(ArperPrintersApp arperPrintersApp) {
-        JIntellitype.setLibraryLocation("src/main/resources/JIntellitype64.dll");
-    	JIntellitype.getInstance();
-    	// Assign global hotkeys to ALT+SHIFT+B
-    	JIntellitype.getInstance().registerHotKey(1, JIntellitype.MOD_ALT + JIntellitype.MOD_SHIFT, (int)'B');
-    	//assign this class to be a HotKeyListener
-    	
-    	JIntellitype.getInstance().addHotKeyListener(new ShortcutServiceImpl(arperPrintersApp));
+        if (SystemUtils.IS_OS_WINDOWS) {
+            JIntellitype.setLibraryLocation("src/main/resources/JIntellitype64.dll");
+            JIntellitype.getInstance();
+            // Assign global hotkeys to ALT+SHIFT+B
+            JIntellitype.getInstance().registerHotKey(1, JIntellitype.MOD_ALT + JIntellitype.MOD_SHIFT, (int)'B');
+            //assign this class to be a HotKeyListener
+
+            JIntellitype.getInstance().addHotKeyListener(new ShortcutServiceImpl(arperPrintersApp));
+        }
     }
     
     private static void shutdownShortcut() {
-        JIntellitype.getInstance().unregisterHotKey(1);
-    	JIntellitype.getInstance().cleanUp();
+        if (SystemUtils.IS_OS_WINDOWS) {
+            JIntellitype.getInstance().unregisterHotKey(1);
+            JIntellitype.getInstance().cleanUp();
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
